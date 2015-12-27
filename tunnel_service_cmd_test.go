@@ -8,6 +8,7 @@ import (
 	fake_rpc_handlers "github.com/cloudfoundry/cli/testhelpers/rpc_server/fakes"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"github.com/onsi/gomega/gbytes"
 	"github.com/onsi/gomega/gexec"
 )
 
@@ -52,6 +53,7 @@ var _ = Describe("TunnelServiceCmd", func() {
 				session.Wait()
 
 				Expect(err).NotTo(HaveOccurred())
+				Expect(session).To(gbytes.Say("hello from tunnel-service command"))
 			})
 		})
 	})
