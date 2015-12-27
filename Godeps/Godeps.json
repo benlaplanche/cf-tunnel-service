@@ -1,0 +1,31 @@
+{
+	"ImportPath": "github.com/benlaplanche/cf-tunnel-service",
+	"GoVersion": "go1.4.2",
+	"Deps": [
+		{
+			"ImportPath": "github.com/cloudfoundry/cli/plugin",
+			"Comment": "v6.14.1-17-g25280f4",
+			"Rev": "25280f4b89303e7c634fa23159bca174e98be58c"
+		},
+		{
+			"ImportPath": "github.com/cloudfoundry/cli/testhelpers/plugin_builder",
+			"Comment": "v6.14.1-17-g25280f4",
+			"Rev": "25280f4b89303e7c634fa23159bca174e98be58c"
+		},
+		{
+			"ImportPath": "github.com/cloudfoundry/cli/testhelpers/rpc_server",
+			"Comment": "v6.14.1-17-g25280f4",
+			"Rev": "25280f4b89303e7c634fa23159bca174e98be58c"
+		},
+		{
+			"ImportPath": "github.com/onsi/ginkgo",
+			"Comment": "v1.2.0-8-g25380c6",
+			"Rev": "25380c62e61d3f90436be125b8127dbae578fdef"
+		},
+		{
+			"ImportPath": "github.com/onsi/gomega",
+			"Comment": "v1.0-50-gd6c945f",
+			"Rev": "d6c945f9fdbf6cad99e85b0feff591caa268e0db"
+		}
+	]
+}
