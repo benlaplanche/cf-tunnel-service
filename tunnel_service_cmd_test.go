@@ -2,6 +2,7 @@ package main_test
 
 import (
 	. "github.com/benlaplanche/cf-tunnel-service"
+	"github.com/cloudfoundry/cli/testhelpers/rpc_server"
 	fake_rpc_handlers "github.com/cloudfoundry/cli/testhelpers/rpc_server/fakes"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
@@ -15,4 +16,28 @@ var _ = Describe("TunnelServiceCmd", func() {
 		ts          *test_rpc_server.TestServer
 		err         error
 	)
+
+	BeforeEach(func() {
+		rpcHandlers = &fake_rpc_handlers.FakeHandlers{}
+		ts, err = test_rpc_server.NewTestRpcServer(rpcHandlers)
+		Expect(err).NotTo(HaveOccurred())
+
+		err = ts.Start()
+		Expect(err).NotTo(HaveOccurred())
+
+		rpcHandlers.CallCoreCommandStub = func(_ []string, retVal *bool) error {
+			*retVal = true
+			return nil
+		}
+
+		rpcHandlers.GetOutputAndResetStub = func(_ bool, retVal *[]string) error {
+			*retVal = []string{"{}"}
+			return nil
+		}
+
+	})
+
+	AfterEach(func() {
+		ts.Stop()
+	})
 })
