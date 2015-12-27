@@ -1,11 +1,14 @@
 package main_test
 
 import (
+	"os/exec"
+
 	. "github.com/benlaplanche/cf-tunnel-service"
 	"github.com/cloudfoundry/cli/testhelpers/rpc_server"
 	fake_rpc_handlers "github.com/cloudfoundry/cli/testhelpers/rpc_server/fakes"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"github.com/onsi/gomega/gexec"
 )
 
 const validPluginPath = "./service-tunnel"
@@ -39,5 +42,17 @@ var _ = Describe("TunnelServiceCmd", func() {
 
 	AfterEach(func() {
 		ts.Stop()
+	})
+
+	Describe("tunnel-service", func() {
+		Context("Option flags", func() {
+			It("accepts service-instance-name and remote-port as valid mandatory flags", func() {
+				args := []string{ts.Port(), "tunnel-service", "my-data-service", "8080"}
+				session, err := gexec.Start(exec.Command(validPluginPath, args...), GinkgoWriter, GinkgoWriter)
+				session.Wait()
+
+				Expect(err).NotTo(HaveOccurred())
+			})
+		})
 	})
 })
