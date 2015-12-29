@@ -11,7 +11,7 @@ import (
 	"github.com/onsi/gomega/gexec"
 )
 
-const validPluginPath = "./service-tunnel"
+const validPluginPath = "./tunnel_service_cmd.exe"
 
 var _ = Describe("TunnelServiceCmd", func() {
 	var (
