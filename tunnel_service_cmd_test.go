@@ -3,7 +3,6 @@ package main_test
 import (
 	"os/exec"
 
-	. "github.com/benlaplanche/cf-tunnel-service"
 	"github.com/cloudfoundry/cli/testhelpers/rpc_server"
 	fake_rpc_handlers "github.com/cloudfoundry/cli/testhelpers/rpc_server/fakes"
 	. "github.com/onsi/ginkgo"

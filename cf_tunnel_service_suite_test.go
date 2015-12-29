@@ -10,6 +10,6 @@ import (
 
 func TestCfTunnelService(t *testing.T) {
 	RegisterFailHandler(Fail)
-	plugin_builder.BuildTestBinary("", "tunnel_service")
+	plugin_builder.BuildTestBinary("", "tunnel_service_cmd")
 	RunSpecs(t, "CfTunnelService Suite")
 }
