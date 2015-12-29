@@ -25,5 +25,5 @@ This CF CLI plugin will push an empty application into the space which you are c
 
 ## Credit
 
-Credit to [Marco Nicosia](github.com/menicosia)
+Credit to [Marco Nicosia](https://github.com/menicosia) for the original idea. 
 
