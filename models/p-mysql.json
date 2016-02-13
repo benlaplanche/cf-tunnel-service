@@ -1,0 +1,19 @@
+"p-mysql": [
+  {
+    "name": "mysql",
+    "label": "p-mysql",
+    "tags": [
+      "mysql"
+    ],
+    "plan": "512mb",
+    "credentials": {
+      "hostname": "10.0.2.15",
+      "port": 3306,
+      "name": "cf_f0eee691_a445_46d2_b8c5_fe2a8c74a174",
+      "username": "XCh0Xe1fN3ikoz9K",
+      "password": "Te2ZsezWtohGLCsU",
+      "uri": "mysql://XCh0Xe1fN3ikoz9K:Te2ZsezWtohGLCsU@10.0.2.15:3306/cf_f0eee691_a445_46d2_b8c5_fe2a8c74a174?reconnect=true",
+      "jdbcUrl": "jdbc:mysql://10.0.2.15:3306/cf_f0eee691_a445_46d2_b8c5_fe2a8c74a174?user=XCh0Xe1fN3ikoz9K&password=Te2ZsezWtohGLCsU"
+    }
+  }
+]

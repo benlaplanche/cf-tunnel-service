@@ -1,0 +1,16 @@
+"p-redis": [
+  {
+    "name": "redis",
+    "label": "p-redis",
+    "tags": [
+      "pivotal",
+      "redis"
+    ],
+    "plan": "shared-vm",
+    "credentials": {
+      "host": "10.0.2.15",
+      "password": "007745f0-dd84-4260-90ee-755fc15e9da9",
+      "port": 29498
+    }
+  }
+]
