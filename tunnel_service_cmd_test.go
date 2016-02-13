@@ -3,6 +3,8 @@ package main_test
 import (
 	"os/exec"
 
+	"errors"
+	"github.com/cloudfoundry/cli/plugin/models"
 	"github.com/cloudfoundry/cli/testhelpers/rpc_server"
 	fake_rpc_handlers "github.com/cloudfoundry/cli/testhelpers/rpc_server/fakes"
 	. "github.com/onsi/ginkgo"
@@ -52,6 +54,20 @@ var _ = Describe("TunnelServiceCmd", func() {
 				session.Wait()
 
 				Expect(err).NotTo(HaveOccurred())
+				Expect(session).To(gbytes.Say("hello from tunnel-service command"))
+			})
+
+			It("raises an error when a service with the provided name doesn't exist", func() {
+				rpcHandlers.GetServiceStub = func(_ string, retVal *plugin_models.GetService_Model) error {
+					retVal = &plugin_models.GetService_Model{}
+					return errors.New("Service instance not found")
+				}
+
+				args := []string{ts.Port(), "tunnel-service", "my-data-service", "8080"}
+				session, err := gexec.Start(exec.Command(validPluginPath, args...), GinkgoWriter, GinkgoWriter)
+				session.Wait()
+
+				Expect(err).To(HaveOccurred())
 				Expect(session).To(gbytes.Say("hello from tunnel-service command"))
 			})
 		})
