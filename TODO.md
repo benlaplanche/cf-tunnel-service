@@ -15,3 +15,4 @@
  - [ ] Auto-detect common services such as MySQL, Redis, RabbitMQ from the known VCAP_SERVICES structure
  - [ ] Forward multiple ports
  - [ ] Basic check the forwarded port is working
+ - [ ] Add colour coded output

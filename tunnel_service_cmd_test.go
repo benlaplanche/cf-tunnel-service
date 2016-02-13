@@ -57,7 +57,7 @@ var _ = Describe("TunnelServiceCmd", func() {
 				Expect(session).To(gbytes.Say("hello from tunnel-service command"))
 			})
 
-			It("raises an error when a service with the provided name doesn't exist", func() {
+			It("raises an error when a service with the provided service name doesn't exist", func() {
 				rpcHandlers.GetServiceStub = func(_ string, retVal *plugin_models.GetService_Model) error {
 					retVal = &plugin_models.GetService_Model{}
 					return errors.New("Service instance not found")

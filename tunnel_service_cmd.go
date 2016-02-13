@@ -32,8 +32,15 @@ func main() {
 }
 
 func (t *TunnelService) Run(cliConnection plugin.CliConnection, args []string) {
-	switch args[0] {
-	case "tunnel-service":
-		fmt.Printf("hello from tunnel-service command")
+	if len(args) < 3 {
+		fmt.Println("Incorrect usage")
+		fmt.Println(t.GetMetadata().Commands[0].UsageDetails.Usage)
+	} else {
+
+		switch args[0] {
+		case "tunnel-service":
+			fmt.Printf("hello from tunnel-service command")
+		}
+
 	}
 }
