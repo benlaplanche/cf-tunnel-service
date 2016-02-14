@@ -80,6 +80,20 @@ var _ = Describe("TunnelServiceCmd", func() {
 				Expect(err).NotTo(HaveOccurred())
 				Expect(session).To(gbytes.Say("Service instance my-data-service not found"))
 			})
+
+			It("returns the service and plan name if the service is successfully found", func() {
+				rpcHandlers.GetServiceStub = func(_ string, retVal *plugin_models.GetService_Model) error {
+					retVal = &plugin_models.GetService_Model{}
+					return nil
+				}
+
+				args := []string{ts.Port(), "tunnel-service", "my-data-service", "8080"}
+				session, err := gexec.Start(exec.Command(validPluginPath, args...), GinkgoWriter, GinkgoWriter)
+				session.Wait()
+
+				Expect(err).NotTo(HaveOccurred())
+				Expect(session).To(gbytes.Say("Found service my-data-service"))
+			})
 		})
 	})
 })
