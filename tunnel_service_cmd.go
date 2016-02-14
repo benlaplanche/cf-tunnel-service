@@ -6,6 +6,13 @@ import (
 	"github.com/cloudfoundry/cli/plugin"
 )
 
+type TunnelService struct {
+	ServiceInstanceName string
+	ServiceInstancePort string
+	ServiceName         string
+	ServicePlan         string
+}
+
 func (t *TunnelService) GetMetadata() plugin.PluginMetadata {
 	return plugin.PluginMetadata{
 		Name: "Tunnel Service",
@@ -52,6 +59,7 @@ func (t *TunnelService) FetchServiceDetails(cliConnection plugin.CliConnection) 
 
 	if err != nil {
 		fmt.Printf("Service instance %v not found", t.ServiceInstanceName)
+		fmt.Printf("error %v", err)
 	} else {
 		t.ServiceName = returnedService.ServiceOffering.Name
 		t.ServicePlan = returnedService.ServicePlan.Name
