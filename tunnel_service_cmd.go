@@ -6,8 +6,6 @@ import (
 	"github.com/cloudfoundry/cli/plugin"
 )
 
-type TunnelService struct{}
-
 func (t *TunnelService) GetMetadata() plugin.PluginMetadata {
 	return plugin.PluginMetadata{
 		Name: "Tunnel Service",
@@ -37,26 +35,31 @@ func (t *TunnelService) Run(cliConnection plugin.CliConnection, args []string) {
 		fmt.Println(t.GetMetadata().Commands[0].UsageDetails.Usage)
 	} else {
 
-		switch args[0] {
-		case "tunnel-service":
-
-			serviceInstance := args[1]
-
-			returnedService, err := cliConnection.GetService(serviceInstance)
-			fmt.Print(returnedService)
-
-			if err != nil {
-				fmt.Printf("Service instance %v not found", serviceInstance)
-			} else {
-				serviceName := returnedService.ServiceOffering.Name
-				servicePlan := returnedService.ServicePlan.Name
-
-				fmt.Printf("Found service instance %v", serviceInstance)
-				fmt.Printf("Service Name: %v", serviceName)
-				fmt.Printf("Service Plan: %v", servicePlan)
-
-			}
-		}
+		t.SetProperties(args)
+		t.FetchServiceDetails(cliConnection)
 
 	}
+}
+
+func (t *TunnelService) SetProperties(args []string) {
+	t.ServiceInstanceName = args[1]
+	t.ServiceInstancePort = args[2]
+}
+
+func (t *TunnelService) FetchServiceDetails(cliConnection plugin.CliConnection) {
+
+	returnedService, err := cliConnection.GetService(t.ServiceInstanceName)
+
+	if err != nil {
+		fmt.Printf("Service instance %v not found", t.ServiceInstanceName)
+	} else {
+		t.ServiceName = returnedService.ServiceOffering.Name
+		t.ServicePlan = returnedService.ServicePlan.Name
+
+		fmt.Printf("Found service instance %v", t.ServiceInstanceName)
+		fmt.Printf("Service Name: %v", t.ServiceName)
+		fmt.Printf("Service Plan: %v", t.ServicePlan)
+
+	}
+
 }
