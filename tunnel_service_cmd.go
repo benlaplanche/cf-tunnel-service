@@ -15,7 +15,7 @@ type TunnelService struct {
 
 func (t *TunnelService) GetMetadata() plugin.PluginMetadata {
 	return plugin.PluginMetadata{
-		Name: "Tunnel Service",
+		Name: "TunnelService",
 		Commands: []plugin.Command{
 			{
 				Name:     "tunnel-service",
@@ -64,8 +64,8 @@ func (t *TunnelService) FetchServiceDetails(cliConnection plugin.CliConnection) 
 		t.ServiceName = returnedService.ServiceOffering.Name
 		t.ServicePlan = returnedService.ServicePlan.Name
 
-		fmt.Printf("Found service instance %v", t.ServiceInstanceName)
-		fmt.Printf("Service Name: %v", t.ServiceName)
+		fmt.Printf("Found service instance %v \n", t.ServiceInstanceName)
+		fmt.Printf("Service Name: %v \n", t.ServiceName)
 		fmt.Printf("Service Plan: %v", t.ServicePlan)
 
 	}

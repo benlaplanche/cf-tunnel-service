@@ -1,0 +1,5 @@
+#/bin/bash
+
+cf uninstall-plugin TunnelService
+go build tunnel_service_cmd.go
+cf install-plugin tunnel_service_cmd -f

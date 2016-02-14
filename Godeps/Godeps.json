@@ -4,18 +4,18 @@
 	"Deps": [
 		{
 			"ImportPath": "github.com/cloudfoundry/cli/plugin",
-			"Comment": "v6.14.1-17-g25280f4",
-			"Rev": "25280f4b89303e7c634fa23159bca174e98be58c"
+			"Comment": "v6.15.0-125-ga92c47a",
+			"Rev": "a92c47affcd34cfa067fd51d4675dbabf4b7d58e"
 		},
 		{
 			"ImportPath": "github.com/cloudfoundry/cli/testhelpers/plugin_builder",
-			"Comment": "v6.14.1-17-g25280f4",
-			"Rev": "25280f4b89303e7c634fa23159bca174e98be58c"
+			"Comment": "v6.15.0-125-ga92c47a",
+			"Rev": "a92c47affcd34cfa067fd51d4675dbabf4b7d58e"
 		},
 		{
 			"ImportPath": "github.com/cloudfoundry/cli/testhelpers/rpc_server",
-			"Comment": "v6.14.1-17-g25280f4",
-			"Rev": "25280f4b89303e7c634fa23159bca174e98be58c"
+			"Comment": "v6.15.0-125-ga92c47a",
+			"Rev": "a92c47affcd34cfa067fd51d4675dbabf4b7d58e"
 		},
 		{
 			"ImportPath": "github.com/onsi/ginkgo",
