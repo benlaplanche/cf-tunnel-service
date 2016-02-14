@@ -39,14 +39,21 @@ func (t *TunnelService) Run(cliConnection plugin.CliConnection, args []string) {
 
 		switch args[0] {
 		case "tunnel-service":
+
 			serviceInstance := args[1]
 
-			_, err := cliConnection.GetService(serviceInstance)
+			returnedService, err := cliConnection.GetService(serviceInstance)
+			fmt.Print(returnedService)
 
 			if err != nil {
 				fmt.Printf("Service instance %v not found", serviceInstance)
 			} else {
-				fmt.Printf("Found service %v", serviceInstance)
+				serviceName := returnedService.ServiceOffering.Name
+				servicePlan := returnedService.ServicePlan.Name
+
+				fmt.Printf("Found service instance %v", serviceInstance)
+				fmt.Printf("Service Name: %v", serviceName)
+				fmt.Printf("Service Plan: %v", servicePlan)
 
 			}
 		}

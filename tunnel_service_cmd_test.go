@@ -69,7 +69,7 @@ var _ = Describe("TunnelServiceCmd", func() {
 		Context("Finding a service instance", func() {
 			It("raises an error when a service with the provided service name doesn't exist", func() {
 				rpcHandlers.GetServiceStub = func(_ string, retVal *plugin_models.GetService_Model) error {
-					retVal = &plugin_models.GetService_Model{}
+					*retVal = plugin_models.GetService_Model{}
 					return errors.New("Service instance not found")
 				}
 
@@ -83,7 +83,27 @@ var _ = Describe("TunnelServiceCmd", func() {
 
 			It("returns the service and plan name if the service is successfully found", func() {
 				rpcHandlers.GetServiceStub = func(_ string, retVal *plugin_models.GetService_Model) error {
-					retVal = &plugin_models.GetService_Model{}
+					*retVal = plugin_models.GetService_Model{
+						Guid:           "abcde-12345",
+						Name:           "my-data-service",
+						DashboardUrl:   "https://my-dashboard.com",
+						IsUserProvided: false,
+						ServiceOffering: plugin_models.GetService_ServiceFields{
+							Name:             "my-service",
+							DocumentationUrl: "https://docs.my-service.com",
+						},
+						ServicePlan: plugin_models.GetService_ServicePlan{
+							Name: "my-plan",
+							Guid: "7890-defg",
+						},
+						LastOperation: plugin_models.GetService_LastOperation{
+							Type:        "type",
+							State:       "state",
+							Description: "description",
+							CreatedAt:   "created at",
+							UpdatedAt:   "updated at",
+						},
+					}
 					return nil
 				}
 
@@ -92,7 +112,9 @@ var _ = Describe("TunnelServiceCmd", func() {
 				session.Wait()
 
 				Expect(err).NotTo(HaveOccurred())
-				Expect(session).To(gbytes.Say("Found service my-data-service"))
+				Expect(session).To(gbytes.Say("Found service instance my-data-service"))
+				Expect(session).To(gbytes.Say("Service Name: my-service"))
+				Expect(session).To(gbytes.Say("Service Plan: my-plan"))
 			})
 		})
 	})
