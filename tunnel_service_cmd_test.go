@@ -54,9 +54,19 @@ var _ = Describe("TunnelServiceCmd", func() {
 				session.Wait()
 
 				Expect(err).NotTo(HaveOccurred())
-				// Expect(session).To(gbytes.Say("hello from tunnel-service command"))
 			})
 
+			It("raises an error when not enough arguments are supplied", func() {
+				args := []string{ts.Port(), "tunnel-service", "my-data-service"}
+				session, err := gexec.Start(exec.Command(validPluginPath, args...), GinkgoWriter, GinkgoWriter)
+				session.Wait()
+
+				Expect(err).NotTo(HaveOccurred())
+				Expect(session).To(gbytes.Say("cf tunnel-service service-instance-name remote-port"))
+			})
+		})
+
+		Context("Finding a service instance", func() {
 			It("raises an error when a service with the provided service name doesn't exist", func() {
 				rpcHandlers.GetServiceStub = func(_ string, retVal *plugin_models.GetService_Model) error {
 					retVal = &plugin_models.GetService_Model{}
@@ -67,8 +77,8 @@ var _ = Describe("TunnelServiceCmd", func() {
 				session, err := gexec.Start(exec.Command(validPluginPath, args...), GinkgoWriter, GinkgoWriter)
 				session.Wait()
 
-				Expect(err).To(HaveOccurred())
-				Expect(session).To(gbytes.Say("hello from tunnel-service command"))
+				Expect(err).NotTo(HaveOccurred())
+				Expect(session).To(gbytes.Say("Service instance my-data-service not found"))
 			})
 		})
 	})
