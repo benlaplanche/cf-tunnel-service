@@ -56,7 +56,7 @@ func (t *TunnelService) SetProperties(args []string) {
 func (t *TunnelService) FetchServiceDetails(cliConnection plugin.CliConnection) {
 
 	returnedService, err := cliConnection.GetService(t.ServiceInstanceName)
-
+	fmt.Printf("error == %v", err)
 	if err != nil {
 		fmt.Printf("Service instance %v not found", t.ServiceInstanceName)
 		fmt.Printf("error %v", err)

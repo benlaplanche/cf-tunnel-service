@@ -4,6 +4,7 @@ import (
 	"os/exec"
 
 	"errors"
+
 	"github.com/cloudfoundry/cli/plugin/models"
 	"github.com/cloudfoundry/cli/testhelpers/rpc_server"
 	fake_rpc_handlers "github.com/cloudfoundry/cli/testhelpers/rpc_server/fakes"
@@ -69,7 +70,7 @@ var _ = Describe("TunnelServiceCmd", func() {
 		Context("Finding a service instance", func() {
 			It("raises an error when a service with the provided service name doesn't exist", func() {
 				rpcHandlers.GetServiceStub = func(_ string, retVal *plugin_models.GetService_Model) error {
-					*retVal = plugin_models.GetService_Model{}
+					//*retVal = plugin_models.GetService_Model{}
 					return errors.New("Service instance not found")
 				}
 
